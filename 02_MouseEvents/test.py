@@ -11,13 +11,13 @@ def ClickEvent(event, x, y, flages, param):
     if(event == cv2.EVENT_RBUTTONDOWN):
         blue  = img[y, x, 0]
         green = img[y, x, 1]
-        red   = img[y, x, 2]
+        red   = img[y, x, 2] 
         txt = 'B: ' + str(blue) + ' G: ' + str(green) + ' R: ' + str(red)
         cv2.putText(img, txt, (x, y), font, 0.5, (200, 100, 100), 2, cv2.LINE_AA)
 
     cv2.imshow('image', img)
 
-img = np.zeros((512, 512, 3), np.uint8)
+img = cv2.imread("lena.jpg", -1)
 cv2.imshow('image', img)
 cv2.setMouseCallback('image', ClickEvent)
 cv2.waitKey(0)
