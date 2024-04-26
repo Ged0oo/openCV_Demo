@@ -8,11 +8,12 @@ def ClickEvent(event, x, y, flages, param):
 
 img  = cv2.imread("test.jpg")
 img2 = cv2.imread("lena.jpg")
-final = cv2.add(img, img2)
 
 img  = cv2.resize(img ,  (512, 512))
 img2 = cv2.resize(img2,  (512, 512))
 
+#final = cv2.add(img, img2)
+final = cv2.addWeighted(img, 0.7 , img2 , 0.3, 0)
 cv2.imshow("image", final)
 cv2.setMouseCallback('image', ClickEvent)
 
