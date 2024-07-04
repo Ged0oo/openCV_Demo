@@ -1,6 +1,10 @@
 import cv2
 import numpy as np
 
+import os
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+
 def nothing(x) :
     pass
 
@@ -12,21 +16,22 @@ cv2.createTrackbar("US", "Tracking", 255, 255, nothing)
 cv2.createTrackbar("LV", "Tracking", 0, 255, nothing)
 cv2.createTrackbar("UV", "Tracking", 255, 255, nothing)
 
-
 while(1) :
     frame = cv2.imread('test.jpg')
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    l_h = cv.getTrackbarPos('LH', 'Tracking')
-    u_h = cv.getTrackbarPos('UH', 'Tracking')
-    l_s = cv.getTrackbarPos('LS', 'Tracking')
-    u_s = cv.getTrackbarPos('US', 'Tracking')
-    l_v = cv.getTrackbarPos('LV', 'Tracking')
-    u_v = cv.getTrackbarPos('UV', 'Tracking')
+    l_h = cv2.getTrackbarPos('LH', 'Tracking')
+    u_h = cv2.getTrackbarPos('UH', 'Tracking')
+    l_s = cv2.getTrackbarPos('LS', 'Tracking')
+    u_s = cv2.getTrackbarPos('US', 'Tracking')
+    l_v = cv2.getTrackbarPos('LV', 'Tracking')
+    u_v = cv2.getTrackbarPos('UV', 'Tracking')
 
+    lb = np.array([l_h, l_s, l_v])
+    ub = np.array([u_h, u_s, u_v])
 
-    mask = cv2. inRange(hsv, l_b, u_b)
+    mask = cv2. inRange(hsv, lb, ub)
     res = cv2.bitwise_and(frame, frame, mask=mask)
 
     cv2.imshow("frame", frame)
